@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["quality", "problems", "reason", "should_retry", "rewrite_action"],
+  "properties": {
+    "quality": { "enum": ["good", "medium", "bad"] },
+    "problems": {
+      "type": "array",
+      "items": { "enum": ["too_many", "too_few", "title_drift", "skill_mismatch", "seniority_mismatch", "location_mismatch"] }
+    },
+    "reason": { "type": "string" },
+    "should_retry": { "type": "boolean" },
+    "rewrite_action": { "$ref": "./rewrite_action.schema.json" }
+  }
+}

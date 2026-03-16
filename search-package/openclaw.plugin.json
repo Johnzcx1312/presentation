@@ -1,0 +1,17 @@
+{
+  "id": "talent-search-strategy-plugin",
+  "name": "Talent Search Strategy",
+  "description": "Native OpenClaw plugin for resume search planning, evaluation, and auto rewrite loop.",
+  "version": "0.1.0",
+  "entry": "dist/src/index.js",
+  "skills": [
+    "skills/talent-search-strategy"
+  ],
+  "tools": [
+    {
+      "name": "resume_search_workflow",
+      "description": "Run fixed filter extraction, keyword decomposition, search, evaluation and rewrite loop",
+      "handler": "dist/src/tools/resume_search_workflow.js"
+    }
+  ]
+}
