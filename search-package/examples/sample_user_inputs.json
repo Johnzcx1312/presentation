@@ -1,0 +1,7 @@
+[
+  {
+    "user_command": "帮我找一个京东出来的Java架构师，懂供应链，最好带过团队",
+    "history_context": {},
+    "options": { "max_iterations": 3, "top_k_eval": 10, "strictness": "balanced" }
+  }
+]

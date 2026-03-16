@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["current_city", "expected_city", "experience_min", "experience_max", "education", "full_time_enroll", "school_tier", "age_min", "age_max", "gender", "languages"],
+  "properties": {
+    "current_city": { "type": "array", "items": { "type": "string" } },
+    "expected_city": { "type": "array", "items": { "type": "string" } },
+    "experience_min": { "type": ["number", "null"] },
+    "experience_max": { "type": ["number", "null"] },
+    "education": { "type": "array", "items": { "enum": ["不限", "本科", "硕士", "博士/博士后", "大专", "中专/中技", "高中及以下"] } },
+    "full_time_enroll": { "enum": [null, "统招本科", "统招硕士", "统招博士", "统招大专"] },
+    "school_tier": { "type": "array", "items": { "enum": ["不限", "211", "985", "双一流", "海外留学"] } },
+    "age_min": { "type": ["number", "null"] },
+    "age_max": { "type": ["number", "null"] },
+    "gender": { "enum": ["不限", "男", "女"] },
+    "languages": { "type": "string" }
+  }
+}

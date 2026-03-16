@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["职位", "公司"],
+  "properties": {
+    "职位": { "type": "array", "items": { "type": "string" } },
+    "公司": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": {
+    "type": "array",
+    "items": { "type": "string" }
+  }
+}

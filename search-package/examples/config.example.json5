@@ -1,0 +1,12 @@
+{
+  adapter: {
+    type: 'external',
+    // 将这里映射到你已有的 resume search tool
+    toolName: 'existing_resume_search_tool'
+  },
+  workflow: {
+    max_iterations: 3,
+    top_k_eval: 10,
+    strictness: 'balanced'
+  }
+}

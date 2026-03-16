@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["status", "iterations_used", "final_query_plan", "fixed_filters", "keyword_plan", "diagnostics", "results", "user_facing_summary"],
+  "properties": {
+    "status": { "enum": ["success", "partial", "failed"] },
+    "iterations_used": { "type": "number" },
+    "final_query_plan": { "type": "object" },
+    "fixed_filters": { "$ref": "./fixed_filters.schema.json" },
+    "keyword_plan": { "$ref": "./keyword_plan.schema.json" },
+    "diagnostics": { "type": "array", "items": { "type": "object" } },
+    "results": { "type": "array", "items": { "type": "object" } },
+    "user_facing_summary": { "type": "string" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "openclaw-talent-search-strategy",
+  "version": "0.1.0",
+  "description": "OpenClaw plugin + skill for resume search strategy orchestration",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.14.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.5.4",
+    "ajv": "^8.17.1"
+  }
+}
