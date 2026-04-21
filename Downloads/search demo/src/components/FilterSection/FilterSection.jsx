@@ -3,15 +3,25 @@ import FilterGroup from './FilterGroup';
 import FilterTag from './FilterTag';
 import SelectedFilters from './SelectedFilters';
 import { filterOptions } from '../../data/mockData';
-import { ChevronDown, ChevronUp, X } from 'lucide-react';
+import { ChevronDown, ChevronUp, Sparkles, CheckCircle } from 'lucide-react';
 
-const FilterSection = () => {
+const FilterSection = ({ isAIConditions = false }) => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
   const [selectedFilters, setSelectedFilters] = useState(['30-35岁', '本科', '硕士', '5年以上', '北京', '统招本科']);
   const [subscribedTags, setSubscribedTags] = useState(['运营_数据_分析_3']);
   const [activeCities, setActiveCities] = useState(['北京']);
   const [activeExp, setActiveExp] = useState('不限');
   const [activeEdu, setActiveEdu] = useState(['本科', '硕士']);
+
+  // AI自动识别的条件（只读展示）
+  const aiRecognizedConditions = [
+    { category: '工作经验', value: '3-5年', confidence: 95 },
+    { category: '学历', value: '本科及以上', confidence: 98 },
+    { category: '目前城市', value: '北京', confidence: 92 },
+    { category: '技能', value: 'Java、Spring Boot、微服务', confidence: 88 },
+    { category: '薪资范围', value: '25-35K', confidence: 90 },
+    { category: '年龄', value: '30-35岁', confidence: 85 },
+  ];
 
   const handleRemoveFilter = (filter) => {
     setSelectedFilters(selectedFilters.filter(f => f !== filter));
@@ -56,6 +66,131 @@ const FilterSection = () => {
     }
   };
 
+  if (isAIConditions) {
+    // AI条件只读展示模式
+    return (
+      <div className="space-y-3">
+        {/* AI识别的条件展示 - 顶部标签 */}
+        <div className="flex flex-wrap gap-2 mb-3">
+          {aiRecognizedConditions.map((condition, index) => (
+            <div 
+              key={index}
+              className="flex items-center gap-2 px-3 py-2 bg-white border border-[#ddd6fe] rounded-lg shadow-sm"
+            >
+              <span className="text-xs text-gray-500">{condition.category}</span>
+              <span className="text-sm font-medium text-[#7c3aed]">{condition.value}</span>
+              <span className="text-xs text-green-600 font-medium">{condition.confidence}%</span>
+            </div>
+          ))}
+        </div>
+
+        {/* 快捷搜索标签（AI自动订阅） */}
+        <div className="flex items-start gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16 pt-1">快捷搜索</span>
+          <div className="flex-1 flex items-center gap-2 flex-wrap">
+            {filterOptions.quickFilters.slice(0, 3).map((filter, index) => (
+              <span
+                key={index}
+                className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] rounded border border-[#ddd6fe]"
+              >
+                {filter.label}
+                <CheckCircle size={10} />
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* 目前城市 */}
+        <div className="flex items-start gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16 pt-1">目前城市</span>
+          <div className="flex-1 flex flex-wrap gap-1">
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">北京</span>
+            <span className="px-2 py-1 text-xs text-gray-400">上海</span>
+            <span className="px-2 py-1 text-xs text-gray-400">深圳</span>
+            <span className="px-2 py-1 text-xs text-gray-400">其他</span>
+          </div>
+        </div>
+
+        {/* 期望城市 */}
+        <div className="flex items-start gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16 pt-1">期望城市</span>
+          <div className="flex-1 flex flex-wrap gap-1">
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">北京</span>
+            <span className="px-2 py-1 text-xs text-gray-400">上海</span>
+            <span className="px-2 py-1 text-xs text-gray-400">深圳</span>
+          </div>
+        </div>
+
+        {/* 工作经验 */}
+        <div className="flex items-center gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16">经验</span>
+          <div className="flex-1 flex items-center gap-1">
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">3-5年</span>
+          </div>
+        </div>
+
+        {/* 教育经历 */}
+        <div className="flex items-start gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16 pt-1">教育经历</span>
+          <div className="flex-1 flex flex-wrap gap-1">
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">本科</span>
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">硕士</span>
+            <span className="px-2 py-1 text-xs text-gray-400">博士/博士后</span>
+          </div>
+        </div>
+
+        {/* 其他筛选 */}
+        <div className="flex items-start gap-3 py-2 border-t border-[#ede9fe]">
+          <span className="text-xs text-gray-500 w-16 pt-1">其他筛选</span>
+          <div className="flex-1 flex items-center gap-2 flex-wrap">
+            <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] font-medium rounded">30-35岁</span>
+            <span className="px-2 py-1 text-xs text-gray-400">3天内活跃</span>
+            <span className="px-2 py-1 text-xs text-gray-400">互联网</span>
+          </div>
+          <button 
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className="flex items-center gap-0.5 text-xs text-[#7c3aed] hover:underline"
+          >
+            {showMoreFilters ? (
+              <><ChevronUp size={12} /> 收起</>
+            ) : (
+              <><ChevronDown size={12} /> 更多</>
+            )}
+          </button>
+        </div>
+
+        {/* 更多条件展开 */}
+        {showMoreFilters && (
+          <div className="mt-2 pt-2 border-t border-[#ede9fe] space-y-2">
+            <div className="flex items-start gap-3">
+              <span className="text-xs text-gray-500 w-16">求职状态</span>
+              <div className="flex-1 flex gap-1">
+                <span className="px-2 py-1 text-xs text-gray-400">在职-考虑机会</span>
+                <span className="px-2 py-1 text-xs text-gray-400">离职-随时到岗</span>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="text-xs text-gray-500 w-16">技能标签</span>
+              <div className="flex-1 flex gap-1 flex-wrap">
+                <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] rounded">Spring Boot</span>
+                <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] rounded">微服务</span>
+                <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] rounded">MySQL</span>
+                <span className="px-2 py-1 text-xs bg-[#f5f3ff] text-[#7c3aed] rounded">Redis</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 底部提示 */}
+        <div className="flex items-center gap-2 pt-3 border-t border-[#ede9fe]">
+          <Sparkles size={14} className="text-[#7c3aed]" />
+          <span className="text-xs text-gray-500">AI根据您的描述自动识别了以上条件，置信度平均 91%</span>
+        </div>
+      </div>
+    );
+  }
+
+  // 原有的完整交互模式
   return (
     <div className="bg-white rounded-lg p-5 shadow-sm mb-4">
       {/* 快捷搜索标签 */}
@@ -75,7 +210,7 @@ const FilterSection = () => {
           ))}
         </div>
         <button className="text-gray-400 hover:text-gray-600 text-sm flex items-center gap-1 pt-1">
-          <X size={14} />
+          <span className="text-lg leading-none">×</span>
           清除全部
         </button>
       </div>
@@ -242,15 +377,9 @@ const FilterSection = () => {
             className="flex items-center gap-0.5 text-sm text-gray-500 hover:text-[#7c3aed] ml-auto"
           >
             {showMoreFilters ? (
-              <>
-                <ChevronUp size={14} />
-                收起
-              </>
+              <><ChevronUp size={14} /> 收起</>
             ) : (
-              <>
-                <ChevronDown size={14} />
-                展开更多条件
-              </>
+              <><ChevronDown size={14} /> 展开更多条件</>
             )}
           </button>
         </div>
