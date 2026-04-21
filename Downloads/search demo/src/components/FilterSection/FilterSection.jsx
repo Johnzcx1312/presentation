@@ -3,7 +3,7 @@ import FilterGroup from './FilterGroup';
 import FilterTag from './FilterTag';
 import SelectedFilters from './SelectedFilters';
 import { filterOptions } from '../../data/mockData';
-import { ChevronDown, ChevronUp, X, BellPlus } from 'lucide-react';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
 
 const FilterSection = () => {
   const [showMoreFilters, setShowMoreFilters] = useState(false);
@@ -56,24 +56,12 @@ const FilterSection = () => {
     }
   };
 
-  // 更多筛选项数据
-  const moreFilters = [
-    { title: '活跃状态', options: ['不限', '今日活跃', '3天内活跃', '7天内活跃', '30天内活跃'] },
-    { title: '求职状态', options: ['不限', '在职-暂不考虑', '在职-考虑机会', '离职-随时到岗'] },
-    { title: '跳槽频率', options: ['不限', '稳定（>3年）', '正常（1-3年）', '频繁（<1年）'] },
-    { title: '性别要求', options: ['不限', '男', '女'] },
-    { title: '语言要求', options: ['不限', '英语', '日语', '韩语', '其他'] },
-    { title: '毕业年份', options: ['不限', '2024', '2023', '2022', '2021', '2020'] },
-    { title: '当前行业', options: ['不限', '互联网', '金融', '教育', '医疗', '制造'] },
-    { title: '期望行业', options: ['不限', '互联网', '金融', '教育', '医疗', '制造'] },
-  ];
-
   return (
     <div className="bg-white rounded-lg p-5 shadow-sm mb-4">
       {/* 快捷搜索标签 */}
-      <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
-        <span className="text-sm text-gray-500 font-medium w-16">快捷搜索</span>
-        <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-start gap-3 mb-4">
+        <span className="text-sm text-gray-500 font-medium w-16 pt-1">快捷搜索</span>
+        <div className="flex-1 flex items-center gap-2 flex-wrap">
           {filterOptions.quickFilters.map((filter, index) => (
             <FilterTag
               key={index}
@@ -86,27 +74,27 @@ const FilterSection = () => {
             />
           ))}
         </div>
-        <button className="ml-auto text-gray-400 hover:text-gray-600 text-sm flex items-center gap-1">
-          <X size={16} />
+        <button className="text-gray-400 hover:text-gray-600 text-sm flex items-center gap-1 pt-1">
+          <X size={14} />
           清除全部
         </button>
       </div>
 
       {/* 目前城市 */}
-      <div className="flex items-start gap-4 py-2.5 border-b border-gray-100">
-        <span className="text-sm text-gray-500 w-16 flex-shrink-0 pt-1">目前城市</span>
-        <div className="flex-1 flex flex-wrap gap-2">
+      <div className="flex items-start gap-3 py-2 border-t border-gray-100">
+        <span className="text-sm text-gray-500 w-16 pt-1">目前城市</span>
+        <div className="flex-1 flex flex-wrap gap-1">
           {filterOptions.currentCities.map((city) => (
             <button
               key={city}
               onClick={() => toggleCity(city)}
               className={`
-                px-3 py-1 text-sm rounded transition-all duration-200
+                px-3 py-1 text-sm rounded transition-colors
                 ${city === '不限' && activeCities.length === 0
-                  ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]'
+                  ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]'
                   : activeCities.includes(city)
-                    ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]'
-                    : 'text-gray-600 hover:text-[#5b21b6] hover:bg-gray-50'
+                    ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]'
+                    : 'text-gray-600 hover:text-[#7c3aed]'
                 }
               `}
             >
@@ -117,17 +105,17 @@ const FilterSection = () => {
       </div>
 
       {/* 期望城市 */}
-      <div className="flex items-start gap-4 py-2.5 border-b border-gray-100">
-        <span className="text-sm text-gray-500 w-16 flex-shrink-0 pt-1">期望城市</span>
-        <div className="flex-1 flex flex-wrap gap-2">
+      <div className="flex items-start gap-3 py-2 border-t border-gray-100">
+        <span className="text-sm text-gray-500 w-16 pt-1">期望城市</span>
+        <div className="flex-1 flex flex-wrap gap-1">
           {filterOptions.expectCities.map((city) => (
             <button
               key={city}
               className={`
-                px-3 py-1 text-sm rounded transition-all duration-200
+                px-3 py-1 text-sm rounded transition-colors
                 ${city === '不限' 
-                  ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]' 
-                  : 'text-gray-600 hover:text-[#5b21b6] hover:bg-gray-50'
+                  ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]' 
+                  : 'text-gray-600 hover:text-[#7c3aed]'
                 }
               `}
             >
@@ -138,36 +126,36 @@ const FilterSection = () => {
       </div>
       
       {/* 工作经验 */}
-      <div className="flex items-start gap-4 py-2.5 border-b border-gray-100">
-        <span className="text-sm text-gray-500 w-16 flex-shrink-0 pt-1">经验</span>
-        <div className="flex-1 flex flex-wrap items-center gap-2">
+      <div className="flex items-center gap-3 py-2 border-t border-gray-100">
+        <span className="text-sm text-gray-500 w-16">经验</span>
+        <div className="flex-1 flex items-center gap-1">
           {filterOptions.experience.map((option) => (
             <button
               key={option}
               onClick={() => setActiveExp(option)}
               className={`
-                px-3 py-1 text-sm rounded transition-all duration-200
+                px-3 py-1 text-sm rounded transition-colors
                 ${activeExp === option
-                  ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]'
-                  : 'text-gray-600 hover:text-[#5b21b6] hover:bg-gray-50'
+                  ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]'
+                  : 'text-gray-600 hover:text-[#7c3aed]'
                 }
               `}
             >
               {option}
             </button>
           ))}
-          <span className="text-sm text-[#5b21b6] font-medium ml-2">自定义</span>
+          <span className="text-sm text-[#7c3aed] ml-2">自定义</span>
           <div className="flex items-center gap-1 ml-2">
             <input 
               type="text" 
               placeholder="5" 
-              className="w-14 px-2 py-1 text-sm border border-gray-300 rounded text-center focus:border-[#7c3aed] focus:outline-none focus:ring-1 focus:ring-[#ddd6fe]"
+              className="w-12 px-2 py-1 text-sm border border-gray-300 rounded text-center focus:border-[#7c3aed] focus:outline-none"
             />
             <span className="text-sm text-gray-400">-</span>
             <input 
               type="text" 
               placeholder="" 
-              className="w-14 px-2 py-1 text-sm border border-gray-300 rounded text-center focus:border-[#7c3aed] focus:outline-none focus:ring-1 focus:ring-[#ddd6fe]"
+              className="w-12 px-2 py-1 text-sm border border-gray-300 rounded text-center focus:border-[#7c3aed] focus:outline-none"
             />
             <span className="text-sm text-gray-500">年</span>
           </div>
@@ -175,110 +163,104 @@ const FilterSection = () => {
       </div>
 
       {/* 教育经历 */}
-      <div className="flex items-start gap-4 py-2.5 border-b border-gray-100">
-        <span className="text-sm text-gray-500 w-16 flex-shrink-0 pt-1">教育经历</span>
-        <div className="flex-1 flex flex-wrap gap-2">
+      <div className="flex items-start gap-3 py-2 border-t border-gray-100">
+        <span className="text-sm text-gray-500 w-16 pt-1">教育经历</span>
+        <div className="flex-1 flex flex-wrap gap-1 items-center">
           {filterOptions.education.map((edu) => (
             <button
               key={edu}
               onClick={() => toggleEdu(edu)}
               className={`
-                px-3 py-1 text-sm rounded transition-all duration-200
+                px-3 py-1 text-sm rounded transition-colors
                 ${edu === '不限' && activeEdu.length === 0
-                  ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]'
+                  ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]'
                   : activeEdu.includes(edu)
-                    ? 'text-[#5b21b6] font-semibold bg-[#f3f0ff]'
-                    : 'text-gray-600 hover:text-[#5b21b6] hover:bg-gray-50'
+                    ? 'text-[#7c3aed] font-medium bg-[#f5f3ff]'
+                    : 'text-gray-600 hover:text-[#7c3aed]'
                 }
               `}
             >
               {edu}
             </button>
           ))}
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-500 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-500 hover:text-[#7c3aed]">
             院校要求
             <ChevronDown size={14} />
           </button>
         </div>
       </div>
 
-      {/* 其他筛选行 */}
-      <div className="flex items-center gap-6 py-2.5 border-b border-gray-100">
-        <span className="text-sm text-gray-500 w-16 flex-shrink-0">其他筛选</span>
-        <div className="flex items-center gap-4 flex-wrap">
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+      {/* 其他筛选 */}
+      <div className="flex items-start gap-3 py-2 border-t border-gray-100">
+        <span className="text-sm text-gray-500 w-16 pt-1">其他筛选</span>
+        <div className="flex-1 flex items-center gap-2 flex-wrap">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             活跃状态
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             求职状态
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             跳槽频率
             <ChevronDown size={14} />
           </button>
-          <button className="px-3 py-1 text-sm text-[#5b21b6] font-semibold bg-[#f3f0ff] rounded">
+          <button className="px-2 py-1 text-sm text-[#7c3aed] font-medium bg-[#f5f3ff] rounded">
             30-35岁
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             性别要求
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             语言要求
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             毕业年份
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             当前行业
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             期望行业
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             当前职能
             <ChevronDown size={14} />
           </button>
-          <button className="flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-[#5b21b6] transition-colors">
+          <button className="flex items-center gap-0.5 px-2 py-1 text-sm text-gray-600 hover:text-[#7c3aed]">
             期望职能
             <ChevronDown size={14} />
           </button>
+          <button 
+            onClick={() => setShowMoreFilters(!showMoreFilters)}
+            className="flex items-center gap-0.5 text-sm text-gray-500 hover:text-[#7c3aed] ml-auto"
+          >
+            {showMoreFilters ? (
+              <>
+                <ChevronUp size={14} />
+                收起
+              </>
+            ) : (
+              <>
+                <ChevronDown size={14} />
+                展开更多条件
+              </>
+            )}
+          </button>
         </div>
-        <button 
-          onClick={() => setShowMoreFilters(!showMoreFilters)}
-          className="ml-auto flex items-center gap-1 text-sm text-gray-500 hover:text-[#5b21b6] transition-colors"
-        >
-          {showMoreFilters ? (
-            <>
-              <ChevronUp size={16} />
-              收起
-            </>
-          ) : (
-            <>
-              <ChevronDown size={16} />
-              展开更多条件
-            </>
-          )}
-        </button>
       </div>
 
       {/* 更多筛选 */}
       {showMoreFilters && (
         <div className="mt-2 border-t border-gray-100 pt-2">
-          {moreFilters.map((filter) => (
-            <FilterGroup 
-              key={filter.title} 
-              title={filter.title} 
-              options={filter.options}
-              multiSelect={true}
-            />
-          ))}
+          <FilterGroup title="活跃状态" options={['不限', '今日活跃', '3天内活跃', '7天内活跃', '30天内活跃']} multiSelect={true} />
+          <FilterGroup title="求职状态" options={['不限', '在职-暂不考虑', '在职-考虑机会', '离职-随时到岗']} multiSelect={true} />
         </div>
       )}
 
