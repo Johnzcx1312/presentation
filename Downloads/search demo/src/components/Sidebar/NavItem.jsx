@@ -1,6 +1,5 @@
 import React from 'react';
 import * as LucideIcons from 'lucide-react';
-import Badge from '../common/Badge';
 
 const NavItem = ({ icon, label, badge, isActive = false, onClick }) => {
   const IconComponent = LucideIcons[icon];
@@ -9,19 +8,19 @@ const NavItem = ({ icon, label, badge, isActive = false, onClick }) => {
     <div
       onClick={onClick}
       className={`
-        flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200
+        flex items-center gap-3 px-4 py-3 cursor-pointer transition-all duration-200 mx-2 rounded-lg
         ${isActive 
-          ? 'bg-gradient-to-r from-purple-50 to-indigo-50 text-primary border-r-2 border-primary' 
-          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+          ? 'bg-white/20 text-white shadow-inner' 
+          : 'text-white/80 hover:bg-white/10 hover:text-white'
         }
       `}
     >
-      {IconComponent && <IconComponent size={20} className={isActive ? 'text-primary' : 'text-gray-500'} />}
+      {IconComponent && <IconComponent size={18} className={isActive ? 'text-white' : 'text-white/70'} />}
       <span className="flex-1 text-sm font-medium">{label}</span>
       {badge && (
-        <Badge variant="default" size="sm" className="min-w-[18px] h-[18px] flex items-center justify-center">
+        <span className="min-w-[18px] h-[18px] flex items-center justify-center bg-red-500 text-white text-xs rounded-full font-medium px-1.5">
           {badge}
-        </Badge>
+        </span>
       )}
     </div>
   );

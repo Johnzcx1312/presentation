@@ -8,12 +8,19 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#6366f1',
-          light: '#818cf8',
-          dark: '#4f46e5',
+          DEFAULT: '#5b21b6',
+          light: '#7c3aed',
+          dark: '#4c1d95',
+          50: '#f3f0ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
         },
-        sidebar: '#ffffff',
-        background: '#f3f4f6',
+        sidebar: {
+          start: '#4c1d95',
+          middle: '#5b21b6',
+          end: '#7c3aed',
+        },
+        background: '#f8f7fc',
       }
     },
   },
