@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
-import SearchHeader from './components/SearchHeader/SearchHeader';
+import AISearchHeader from './components/AISearchHeader/AISearchHeader';
 import FilterSection from './components/FilterSection/FilterSection';
 import TalentList from './components/TalentList/TalentList';
-import { Bell, Crown } from 'lucide-react';
+import { Bell, Crown, Sparkles } from 'lucide-react';
 
 function App() {
+  const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#f8f7fc]">
       {/* 侧边栏 - 固定定位 */}
@@ -17,7 +19,8 @@ function App() {
         <header className="h-14 bg-white shadow-sm flex items-center px-6 sticky top-0 z-40">
           {/* 左侧面包屑/标题 */}
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-gray-800 font-medium">搜索人才</span>
+            <Sparkles size={16} className="text-[#7c3aed]" />
+            <span className="text-gray-800 font-medium">AI人才搜索</span>
           </div>
 
           {/* 右侧功能区 */}
@@ -65,11 +68,23 @@ function App() {
 
         {/* 主内容区域 */}
         <div className="p-5">
-          {/* 搜索区域 */}
-          <SearchHeader />
+          {/* AI智能搜索头部 */}
+          <AISearchHeader 
+            onToggleAdvancedFilters={() => setShowAdvancedFilters(!showAdvancedFilters)}
+            showAdvancedFilters={showAdvancedFilters}
+          />
 
-          {/* 筛选区域 */}
-          <FilterSection />
+          {/* 高级筛选区域 - 可收起 */}
+          {showAdvancedFilters && (
+            <div className="animate-in slide-in-from-top-2 duration-200">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="h-px flex-1 bg-gray-200" />
+                <span className="text-xs text-gray-400">高级筛选条件</span>
+                <div className="h-px flex-1 bg-gray-200" />
+              </div>
+              <FilterSection />
+            </div>
+          )}
 
           {/* 人才列表区域 */}
           <TalentList />
