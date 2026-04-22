@@ -32,6 +32,21 @@ npm run dev
 
 访问 http://localhost:3000 查看页面
 
+### 配置 Kimi API（可选，但推荐）
+为了让“输入框下方的一行 AI 回复”调用真实 Kimi，请按下面做：
+
+```bash
+cp .env.example .env.local
+```
+
+然后编辑 `.env.local`，填入你的 Key：
+
+```bash
+VITE_KIMI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+没配置 Key 也能跑 demo：会自动使用“本地降级回复”（不走网络请求）。
+
 ### 构建生产版本
 ```bash
 npm run build
